@@ -6,6 +6,12 @@
     <title>CCCUP - Coming Soon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--
+    --      @version: 1.0
+    --      @date: 19.8.2025
+    --      @author: digital infrastructure CCCUP 40
+    --      @
+    -->
 
     <link rel="stylesheet" href="style.css">
     <style>
@@ -359,11 +365,10 @@
     </main>
     
     <footer class="footer">
-        <span>&copy;</span><span class="font-hieroglyphics"> Canisius College Cup MMXXV</span>
+        <span>&copy;</span><span class="font-hieroglyphics"> Canisius College MMXXV</span>
     </footer>
 
     <script>
-        // ASCII Art - Eye of Horus approximation
         const asciiArt = `
         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⣤⣤⣤⣦⣶⣤⣤⣤⣤⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -388,11 +393,11 @@
 ⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
         `;
 
-        // Initialize ASCII art
+        
         const asciiElement = document.getElementById('ascii-art');
         asciiElement.textContent = asciiArt;
 
-        // Create particles
+        
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = window.innerWidth > 768 ? 15 : 5;
@@ -408,9 +413,9 @@
         }
 
         const symbols = ['@', '*', '#', '%', '&', '+', '§', '¢'];
-        const morphSpeed = 100; // ms per frame
-        const morphDuration = 10; // how long each char morphs
-        // Keep track of morphing state per character
+        const morphSpeed = 100; 
+        const morphDuration = 10; 
+        
         let morphStates = Array(asciiArt.length).fill(null);
         function animateMorph() {
             let html = '';
@@ -424,32 +429,32 @@
                     html += ' ';
                     continue;
                 }
-                // Check if character is a Braille pattern (like ⣿)
+                
                 const isBraille = char >= '\u2800' && char <= '\u28FF';
                 
-                // Start morphing if not already and it's a Braille character
-                if (isBraille && !morphStates[i] && Math.random() < 0.02) { // ~2% chance to start morphing
+                
+                if (isBraille && !morphStates[i] && Math.random() < 0.02) {
                     morphStates[i] = morphDuration;
                 }
                 if (morphStates[i]) {
-                    // Still morphing, show random symbol
+                    
                     html += `<span class="morph">${symbols[Math.floor(Math.random() * symbols.length)]}</span>`;
                     morphStates[i] -= morphSpeed;
                     if (morphStates[i] <= 0) {
-                        morphStates[i] = null; // done morphing, will revert next frame
+                        morphStates[i] = null;
                     }
                 } else {
-                    html += char; // original ASCII char
+                    html += char;
                 }
             }
             asciiElement.innerHTML = html;
         }
-        // Start animation
+        
         setInterval(animateMorph, morphSpeed);
-        // Initialize
+        
         createParticles();
 
-        // Handle window resize
+        
         window.addEventListener('resize', () => {
             const particlesContainer = document.getElementById('particles');
             particlesContainer.innerHTML = '';
